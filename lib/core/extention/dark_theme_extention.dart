@@ -14,13 +14,12 @@ final _darktheme = ThemeData(
     extensions: [
       //AppColorExtension
       AppColorExtension(
-        cardBackground:AppColorPalettes.blueGrey800 ,
-        dashboardCardBackground:AppColorPalettes.grey400,
-        dashboarsemidCardBackground:AppColorPalettes.grey400 ,
-        dashboarsmaldCardBackground:AppColorPalettes.grey250 ,
+        cardBackground: AppColorPalettes.blueGrey800,
+        dashboardCardBackground: AppColorPalettes.grey400,
+        dashboarsemidCardBackground: AppColorPalettes.grey400,
+        dashboarsmaldCardBackground: AppColorPalettes.grey250,
         profileCardBackground: AppColorPalettes.grey400,
-        loginCardBackground:AppColorPalettes.blueGrey800 ,
-
+        loginCardBackground: AppColorPalettes.blueGrey800,
         buttoncolor: AppColorPalettes.blue,
         primary: AppColorPalettes.black500,
         secondary: AppColorPalettes.white500,
@@ -42,7 +41,7 @@ final _darktheme = ThemeData(
         bodySubText: const TextStyle(
             fontSize: 16,
             fontFamily: 'poppins',
-            color: AppColorPalettes.grey400,
+            color: AppColorPalettes.grey50,
             fontWeight: FontWeight.w400),
         buttonText: const TextStyle(
             fontSize: 16,

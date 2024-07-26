@@ -4,7 +4,7 @@ import 'package:vikncodes_task/core/extention/dark_theme_extention.dart';
 import 'package:vikncodes_task/core/router/router.dart';
 
 void main() {
-  runApp(const MainApp());
+  runApp(const ProviderScope(child: MainApp()));
 }
 
 class MainApp extends ConsumerWidget {

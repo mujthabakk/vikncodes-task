@@ -12,6 +12,7 @@ class AppColorPalettes {
   static const blue400 = Color(0xFF436FC8);
   static const blue50 = Color(0xFFA9C9C5);
   static const grey300 = Color(0xFF838383);
+  static const grey50 = Color(0xFF838383);
   static const grey400 = Color(0xFF0F0F0F);
   static const grey450 = Color(0xFF0F0F0F);
   static const grey250 = Color(0xFF131313);
@@ -27,7 +28,7 @@ class AppColorPalettes {
   static const grey850 = Color(0xFF333333);
   static const silver300 = Color(0xFFCFCFCF);
   static const grey200 = Color(0xFFAAAAAA);
-  static const grey50 = Color(0xFFF7F7F7);
+ 
   static const grey600 = Color(0xFF606060);
   static const white100 = Color(0xFFD1D0CD);
   static const green = Color(0xFF4CAF50);
