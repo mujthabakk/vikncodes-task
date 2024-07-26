@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:vikncodes_task/core/constance/login_page_const.dart';
 import 'package:vikncodes_task/core/extention/app_color_palete.dart';
 import 'package:vikncodes_task/core/extention/app_extention.dart';
+import 'package:vikncodes_task/pages/dashborde/home_page.dart';
 
 class LoginPage extends ConsumerWidget {
   static const routePath = '/login';
@@ -96,7 +98,9 @@ class LoginPage extends ConsumerWidget {
                   ),
                   Center(
                     child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        context.push(HomePage.routePath);
+                      },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: context.color.buttoncolor,
                         padding: EdgeInsets.symmetric(
