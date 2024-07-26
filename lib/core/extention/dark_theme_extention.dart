@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:vikncodes_task/core/extention/app_color_extention.dart';
@@ -15,113 +14,79 @@ final _darktheme = ThemeData(
     extensions: [
       //AppColorExtension
       AppColorExtension(
-        buttoncolor: [AppColorPalettes.green500, AppColorPalettes.green300],
+        cardBackground:AppColorPalettes.blueGrey800 ,
+        dashboardCardBackground:AppColorPalettes.grey400,
+        dashboarsemidCardBackground:AppColorPalettes.grey400 ,
+        dashboarsmaldCardBackground:AppColorPalettes.grey250 ,
+        profileCardBackground: AppColorPalettes.grey400,
+        loginCardBackground:AppColorPalettes.blueGrey800 ,
+
+        buttoncolor: AppColorPalettes.blue,
         primary: AppColorPalettes.black500,
         secondary: AppColorPalettes.white500,
         text: AppColorPalettes.grey850,
         textSubtle: AppColorPalettes.grey200,
         btnText: AppColorPalettes.black500,
-        border: AppColorPalettes.silver300,
         bottomNavBorder: AppColorPalettes.grey600,
-        appBarBackground: AppColorPalettes.green500,
-        cardBackground: AppColorPalettes.grey900,
-        iconButtonBackgroud: AppColorPalettes.grey900,
-        iconButtonIcon: AppColorPalettes.white500,
         bottomNavBar: AppColorPalettes.grey1000,
-        messageBackground: AppColorPalettes.green300,
       ),
       //AppSpaceExtension
       AppSpaceExtension.fromBaseSpace(8),
       //AppTypographyExtension
       AppTypographyExtension(
-        body: const TextStyle(
-            fontSize: 14,
+        bodySubTextWhite: const TextStyle(
+            fontSize: 16,
             fontFamily: 'poppins',
             color: AppColorPalettes.white500,
-            fontWeight: FontWeight.w500),
-        bodyWhite: const TextStyle(
-            fontSize: 14,
+            fontWeight: FontWeight.w400),
+        bodySubText: const TextStyle(
+            fontSize: 16,
             fontFamily: 'poppins',
-            color: AppColorPalettes.white500,
-            fontWeight: FontWeight.w500),
-        bodyLarge: const TextStyle(
-            fontSize: 18,
+            color: AppColorPalettes.grey400,
+            fontWeight: FontWeight.w400),
+        buttonText: const TextStyle(
+            fontSize: 16,
             fontFamily: 'poppins',
-            color: AppColorPalettes.white500,
+            color: AppColorPalettes.blue,
             fontWeight: FontWeight.w500),
-        bodySemibold: const TextStyle(
-            fontSize: 14,
+        h1Bold: const TextStyle(
+            fontSize: 22,
             fontFamily: 'poppins',
             color: AppColorPalettes.white500,
             fontWeight: FontWeight.w600),
-        bodyLargeSemiBold: const TextStyle(
-            fontSize: 18,
+        h2: const TextStyle(
+            fontSize: 16,
             fontFamily: 'poppins',
             color: AppColorPalettes.white500,
-            fontWeight: FontWeight.w600),
+            fontWeight: FontWeight.w400),
+        h1SemiBold: const TextStyle(
+            fontSize: 22,
+            fontFamily: 'poppins',
+            color: AppColorPalettes.white500,
+            fontWeight: FontWeight.w400),
+        redText: const TextStyle(
+            fontSize: 16,
+            fontFamily: 'poppins',
+            color: AppColorPalettes.red500,
+            fontWeight: FontWeight.w400),
         bodySmall: const TextStyle(
-            fontSize: 10,
+            fontSize: 12,
             fontFamily: 'poppins',
             color: AppColorPalettes.white500,
-            fontWeight: FontWeight.w500),
+            fontWeight: FontWeight.w400),
         bodySmallSemiBold: const TextStyle(
             fontSize: 10,
             fontFamily: 'poppins',
             color: AppColorPalettes.white500,
             fontWeight: FontWeight.w600),
         h1: const TextStyle(
-            fontSize: 32,
+            fontSize: 21,
             fontFamily: 'poppins',
             color: AppColorPalettes.white500,
             fontWeight: FontWeight.w500),
-        h1SemiBold: const TextStyle(
-            fontSize: 32,
-            fontFamily: 'poppins',
-            color: AppColorPalettes.white500,
-            fontWeight: FontWeight.w600),
-        h1Bold: const TextStyle(
-            fontSize: 32,
-            fontFamily: 'poppins',
-            color: AppColorPalettes.white500,
-            fontWeight: FontWeight.w700),
-        h2: const TextStyle(
-            fontSize: 24,
-            fontFamily: 'poppins',
-            color: AppColorPalettes.white500,
-            fontWeight: FontWeight.w500),
-        h2SemiBold: const TextStyle(
-            fontSize: 24,
-            fontFamily: 'poppins',
-            color: AppColorPalettes.white500,
-            fontWeight: FontWeight.w600),
-        h2Bold: const TextStyle(
-            fontSize: 24,
-            fontFamily: 'poppins',
-            color: AppColorPalettes.white500,
-            fontWeight: FontWeight.w700),
-        h3: const TextStyle(
-            fontSize: 20,
-            fontFamily: 'poppins',
-            color: AppColorPalettes.white500,
-            fontWeight: FontWeight.w500),
-        h3SemiBold: const TextStyle(
-            fontSize: 20,
-            fontFamily: 'poppins',
-            color: AppColorPalettes.white500,
-            fontWeight: FontWeight.w600),
-        h3Bold: const TextStyle(
-            fontSize: 20,
-            fontFamily: 'poppins',
-            color: AppColorPalettes.white500,
-            fontWeight: FontWeight.w700),
-        buttonText: const TextStyle(
-            fontSize: 14,
-            fontFamily: 'poppins',
-            color: AppColorPalettes.black500,
-            fontWeight: FontWeight.w600),
-      ),
-      //AppShadowExtension
-     
+
+        //AppShadowExtension
+      )
     ]);
 
 @riverpod

@@ -8,31 +8,31 @@ class AppColorExtension extends ThemeExtension<AppColorExtension> {
   final Color text;
   final Color textSubtle;
   final Color btnText;
-  final Color border;
   final Color bottomNavBorder;
-  final Color appBarBackground;
   final Color cardBackground;
-  final Color messageBackground;
-  final Color iconButtonBackgroud;
-  final Color iconButtonIcon;
   final Color bottomNavBar;
-  final List<Color> buttoncolor;
+  final Color buttoncolor;
+  final Color loginCardBackground;
+  final Color dashboardCardBackground;
+  final Color dashboarsemidCardBackground;
+  final Color dashboarsmaldCardBackground;
+  final Color profileCardBackground;
 
   AppColorExtension({
-    required this.appBarBackground,
+    required this.dashboarsemidCardBackground,
+    required this.profileCardBackground,
+    required this.dashboarsmaldCardBackground,
     required this.buttoncolor,
     required this.primary,
     required this.secondary,
     required this.text,
     required this.textSubtle,
     required this.btnText,
-    required this.border,
     required this.bottomNavBorder,
     required this.cardBackground,
-    required this.messageBackground,
-    required this.iconButtonBackgroud,
-    required this.iconButtonIcon,
     required this.bottomNavBar,
+    required this.loginCardBackground,
+    required this.dashboardCardBackground,
   });
 
   @override
@@ -50,22 +50,31 @@ class AppColorExtension extends ThemeExtension<AppColorExtension> {
     Color? iconButtonBackgroud,
     Color? iconButtonIcon,
     Color? bottomNavBar,
-    List<Color>? buttoncolor,
+    Color? buttoncolor,
+    Color? loginCardBackground,
+    Color? dashboardCardBackground,
+    Color? dashboarsemidCardBackground,
+    Color? dashboarsmaldCardBackground,
+    Color? profileCardBackground,
   }) {
     return AppColorExtension(
+      profileCardBackground:
+          profileCardBackground ?? this.profileCardBackground,
+      dashboarsmaldCardBackground:
+          dashboarsmaldCardBackground ?? this.dashboarsmaldCardBackground,
+      dashboarsemidCardBackground:
+          dashboarsemidCardBackground ?? this.dashboarsemidCardBackground,
+      dashboardCardBackground:
+          dashboardCardBackground ?? this.dashboardCardBackground,
+      loginCardBackground: loginCardBackground ?? this.loginCardBackground,
       buttoncolor: buttoncolor ?? this.buttoncolor,
       primary: primary ?? this.primary,
       secondary: secondary ?? this.secondary,
       text: text ?? this.text,
       textSubtle: textSubtle ?? this.textSubtle,
       btnText: btnText ?? this.btnText,
-      border: border ?? this.border,
       bottomNavBorder: bottomNavBorder ?? this.bottomNavBorder,
-      appBarBackground: appBarBackground ?? this.appBarBackground,
       cardBackground: cardBackground ?? this.cardBackground,
-      messageBackground: messageBackground ?? this.messageBackground,
-      iconButtonBackgroud: iconButtonBackgroud ?? this.iconButtonBackgroud,
-      iconButtonIcon: iconButtonIcon ?? this.iconButtonIcon,
       bottomNavBar: bottomNavBar ?? this.bottomNavBar,
     );
   }
@@ -77,26 +86,25 @@ class AppColorExtension extends ThemeExtension<AppColorExtension> {
       return this;
     }
     return AppColorExtension(
+      dashboarsmaldCardBackground: Color.lerp(
+          dashboarsmaldCardBackground, other.dashboarsmaldCardBackground, t)!,
+      dashboarsemidCardBackground: Color.lerp(
+          dashboarsemidCardBackground, other.dashboarsemidCardBackground, t)!,
+      dashboardCardBackground: Color.lerp(
+          dashboardCardBackground, other.dashboardCardBackground, t)!,
+      loginCardBackground:
+          Color.lerp(loginCardBackground, other.loginCardBackground, t)!,
+      buttoncolor: Color.lerp(buttoncolor, other.buttoncolor, t)!,
       primary: Color.lerp(primary, other.primary, t)!,
-      buttoncolor: List<Color>.generate(
-          buttoncolor.length,
-          (index) => Color.lerp(
-              buttoncolor[index], other.buttoncolor[index], t)!),
       secondary: Color.lerp(secondary, other.secondary, t)!,
       text: Color.lerp(text, other.text, t)!,
       textSubtle: Color.lerp(textSubtle, other.textSubtle, t)!,
       btnText: Color.lerp(btnText, other.btnText, t)!,
-      border: Color.lerp(border, other.border, t)!,
       bottomNavBorder: Color.lerp(bottomNavBorder, other.bottomNavBorder, t)!,
-      appBarBackground:
-          Color.lerp(appBarBackground, other.appBarBackground, t)!,
       cardBackground: Color.lerp(cardBackground, other.cardBackground, t)!,
-      messageBackground:
-          Color.lerp(messageBackground, other.messageBackground, t)!,
-      iconButtonBackgroud:
-          Color.lerp(iconButtonBackgroud, other.iconButtonBackgroud, t)!,
-      iconButtonIcon: Color.lerp(iconButtonIcon, other.iconButtonIcon, t)!,
       bottomNavBar: Color.lerp(bottomNavBar, other.bottomNavBar, t)!,
+      profileCardBackground:
+          Color.lerp(profileCardBackground, other.profileCardBackground, t)!,
     );
   }
 }
