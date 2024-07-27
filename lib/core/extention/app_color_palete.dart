@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 class AppColorPalettes {
   static const white500 = Color(0xFFFFFFFF);
+  static const grennmix = Color(0xFF1C3347);
+
   static const white200 = Color(0xFFF6EFED);
   static const blueGrey800 = Color(0xFF08131E);
   static const black500 = Color(0xFF000000);
@@ -28,7 +30,7 @@ class AppColorPalettes {
   static const grey850 = Color(0xFF333333);
   static const silver300 = Color(0xFFCFCFCF);
   static const grey200 = Color(0xFFAAAAAA);
- 
+
   static const grey600 = Color(0xFF606060);
   static const white100 = Color(0xFFD1D0CD);
   static const green = Color(0xFF4CAF50);

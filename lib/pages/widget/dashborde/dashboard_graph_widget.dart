@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:vikncodes_task/core/constance/home_page_const.dart';
 import 'package:vikncodes_task/core/extention/app_color_palete.dart';
 import 'package:vikncodes_task/core/extention/app_extention.dart';
@@ -27,7 +28,6 @@ class DashBordGraphWidget extends ConsumerWidget {
         padding: EdgeInsets.all(context.spacer.space_200),
         child: Column(
           children: [
-            ////// //
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -63,7 +63,24 @@ class DashBordGraphWidget extends ConsumerWidget {
               child: Container(
                 width: double.infinity,
                 height: 200,
-                color: AppColorPalettes.grey150,
+                child: SfCartesianChart(
+                  primaryXAxis: DateTimeAxis(
+                    // majorGridLines: const MajorGridLines(width: 5),
+                    // minorGridLines: const MinorGridLines(width: 5),
+                    autoScrollingDelta: DateTime.april,
+                    isVisible: false,
+                    majorTickLines: const MajorTickLines(width: 1),
+                    minorTickLines: const MinorTickLines(width: 1),
+                    labelStyle: const TextStyle(color: Colors.white),
+                  ),
+                  series: [
+                    LineSeries<SalesData, DateTime>(
+                      dataSource: getChartData(),
+                      xValueMapper: (SalesData sales, _) => sales.date,
+                      yValueMapper: (SalesData sales, _) => sales.sales,
+                    ),
+                  ],
+                ),
               ),
             ),
             Padding(
@@ -110,4 +127,20 @@ class DashBordGraphWidget extends ConsumerWidget {
       ),
     );
   }
+
+  List<SalesData> getChartData() {
+    return [
+      SalesData(DateTime(2022, 1, 1), 35),
+      SalesData(DateTime(2022, 2, 1), 28),
+      SalesData(DateTime(2022, 3, 1), 34),
+      SalesData(DateTime(2022, 4, 1), 32),
+      SalesData(DateTime(2022, 5, 1), 40),
+    ];
+  }
+}
+
+class SalesData {
+  SalesData(this.date, this.sales);
+  final DateTime date;
+  final double sales;
 }
