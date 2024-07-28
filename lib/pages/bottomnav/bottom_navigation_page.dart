@@ -6,29 +6,42 @@ import 'package:vikncodes_task/pages/profile_page.dart';
 // Define State Providers
 final selectedProvider = StateProvider<int>((ref) => 0);
 
-final pageControllerProvider = Provider.autoDispose<PageController>((ref) {
-  final controller = PageController(initialPage: 0);
-  ref.onDispose(controller.dispose);
-  return controller;
-});
-
-class BottomNaviagtionPage extends ConsumerWidget {
+class BottomNaviagtionPage extends ConsumerStatefulWidget {
   static const routePath = '/bottomnav';
   const BottomNaviagtionPage({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<BottomNaviagtionPage> createState() => _BottomNaviagtionPageState();
+}
+
+class _BottomNaviagtionPageState extends ConsumerState<BottomNaviagtionPage> {
+  late final PageController _pageController;
+
+  @override
+  void initState() {
+    super.initState();
+    _pageController = PageController(initialPage: 0);
+  }
+
+  @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final selectedIndex = ref.watch(selectedProvider);
-    final pageController = ref.watch(pageControllerProvider);
 
     void onItemTapped(int index) {
       ref.read(selectedProvider.notifier).state = index;
-      pageController.jumpToPage(index);
+      _pageController.jumpToPage(index);
     }
 
     return Scaffold(
       body: PageView(
-        controller: pageController,
+        physics: const NeverScrollableScrollPhysics(), // Disable scrolling
+        controller: _pageController,
         children: const <Widget>[
           HomePage(),
           Center(child: Text("")),
@@ -38,7 +51,6 @@ class BottomNaviagtionPage extends ConsumerWidget {
         onPageChanged: (index) {
           ref.read(selectedProvider.notifier).state = index;
         },
-        physics: const NeverScrollableScrollPhysics(), // Disable scrolling
       ),
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Colors.transparent,
