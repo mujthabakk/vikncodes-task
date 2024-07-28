@@ -16,7 +16,6 @@ class FilterPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     TextEditingController searchController =
         TextEditingController(text: "2024-06-10");
-    List filterData = ref.watch(filter.notifier).state;
 
     return Scaffold(
       appBar: AppBar(
@@ -38,10 +37,9 @@ class FilterPage extends ConsumerWidget {
       ),
       body: ref.watch(salesProvider).when(
             data: (data) {
-              // Filter data based on search input
-            final  filterData=  ref.watch(FilterControllerProvider(data: data.data!));
-
-             
+              // Watch the filtered data state
+              final filterData =
+                  ref.watch(filterControllerProvider(data: data.data!));
 
               return SingleChildScrollView(
                 child: Column(
@@ -86,25 +84,25 @@ class FilterPage extends ConsumerWidget {
                         Padding(
                           padding: EdgeInsets.all(context.spacer.space_200),
                           child: CalenderWidget(
-                            onChanged: (value) {
+                            controller: searchController,
+                            onChanged: (value) async {
                               ref
                                   .watch(
-                                      FilterControllerProvider(data: data.data!)
+                                      filterControllerProvider(data: data.data!)
                                           .notifier)
                                   .filterData(value);
                             },
-                            controller: searchController,
                           ),
                         ),
                         CalenderWidget(
-                          onChanged: (value) {
+                          controller: searchController,
+                          onChanged: (value) async {
                             ref
                                 .watch(
-                                    FilterControllerProvider(data: data.data!)
+                                    filterControllerProvider(data: data.data!)
                                         .notifier)
                                 .filterData(value);
                           },
-                          controller: searchController,
                         ),
                       ],
                     ),
@@ -128,9 +126,7 @@ class FilterPage extends ConsumerWidget {
                             text: "Invoiced",
                           ),
                           StatusesWidget(
-                            onTap: () {
-                              
-                            },
+                            onTap: () {},
                             text: "Cancelled",
                           ),
                         ],
