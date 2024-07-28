@@ -1,13 +1,16 @@
+import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:vikncodes_task/controller/auth/login_provider.dart';
+import 'package:vikncodes_task/controller/auth/token_provider.dart';
 import 'package:vikncodes_task/core/constance/login_page_const.dart';
 import 'package:vikncodes_task/core/extention/app_color_palete.dart';
 import 'package:vikncodes_task/core/extention/app_extention.dart';
-import 'package:vikncodes_task/pages/Invoices_page.dart';
-import 'package:vikncodes_task/pages/dashborde/home_page.dart';
-import 'package:vikncodes_task/pages/filter_page.dart';
-import 'package:vikncodes_task/pages/profile_page.dart';
+import 'package:vikncodes_task/core/utils/snak_bar_utils.dart';
+import 'package:vikncodes_task/pages/bottomnav/bottom_navigation_page.dart';
+import 'package:vikncodes_task/service/get_user_profile_service.dart';
+import 'package:vikncodes_task/service/use_details/user_details_service.dart';
 
 class LoginPage extends ConsumerWidget {
   static const routePath = '/login';
@@ -15,7 +18,12 @@ class LoginPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final userName = TextEditingController(text: "Rabeeh@vk");
+    final password = TextEditingController(text: "Rabeeh@000");
+    final formKey = GlobalKey<FormState>();
+
     final constant = ref.watch(loginPageConstProvider);
+
     return Scaffold(
       body: Container(
         decoration: BoxDecoration(
@@ -60,31 +68,48 @@ class LoginPage extends ConsumerWidget {
                       color: context.color.loginCardBackground,
                       borderRadius: BorderRadius.circular(8),
                     ),
-                    child: Column(
-                      children: [
-                        TextField(
-                          decoration: InputDecoration(
-                            prefixIcon: Icon(Icons.person,
-                                color: context.color.buttoncolor),
-                            labelText: constant.usernameText,
-                            labelStyle: context.typography.bodySubText,
-                            border: InputBorder.none,
+                    child: Form(
+                      key: formKey,
+                      child: Column(
+                        children: [
+                          TextFormField(
+                            validator: (value) {
+                              if (userName.text.isEmpty) {
+                                return 'Enter your Email';
+                              }
+                              return null;
+                            },
+                            controller: userName,
+                            decoration: InputDecoration(
+                              prefixIcon: Icon(Icons.person,
+                                  color: context.color.buttoncolor),
+                              labelText: constant.usernameText,
+                              labelStyle: context.typography.bodySubText,
+                              border: InputBorder.none,
+                            ),
                           ),
-                        ),
-                        const Divider(color: AppColorPalettes.grey150),
-                        TextField(
-                          obscureText: true,
-                          decoration: InputDecoration(
-                            prefixIcon: Icon(Icons.lock,
-                                color: context.color.buttoncolor),
-                            suffixIcon: const Icon(Icons.visibility,
-                                color: AppColorPalettes.grey150),
-                            labelText: constant.passwordText,
-                            labelStyle: context.typography.bodySubText,
-                            border: InputBorder.none,
+                          const Divider(color: AppColorPalettes.grey150),
+                          TextFormField(
+                            validator: (value) {
+                              if (password.text.isEmpty) {
+                                return 'Enter your password';
+                              }
+                              return null;
+                            },
+                            controller: password,
+                            obscureText: true,
+                            decoration: InputDecoration(
+                              prefixIcon: Icon(Icons.lock,
+                                  color: context.color.buttoncolor),
+                              suffixIcon: const Icon(Icons.visibility,
+                                  color: AppColorPalettes.grey150),
+                              labelText: constant.passwordText,
+                              labelStyle: context.typography.bodySubText,
+                              border: InputBorder.none,
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                   Align(
@@ -101,8 +126,51 @@ class LoginPage extends ConsumerWidget {
                   ),
                   Center(
                     child: ElevatedButton(
-                      onPressed: () {
-                        context.push(HomePage.routePath);
+                      onPressed: () async {
+                        if (formKey.currentState!.validate()) {
+                          try {
+                            final data = await ref
+                                .read(loginProvider.notifier)
+                                .login(
+                                    email: userName.text,
+                                    password: password.text);
+
+                            ref.watch(tokenProvider.notifier).state =
+                                data.data?.access ?? "no token";
+                                
+                            await GetUserProfileService().getUserDetails(
+                              token: data.data?.access ?? "no token",
+                            );
+                            await UserDetailsService().userdetails(
+                              token: data.data?.access ?? "no token",
+                            );
+
+                            if (data.data != null &&
+                                data.data?.username == userName.text) {
+                              if (data.data!.access != null) {
+                                if (context.mounted) {
+                                  context.push(BottomNaviagtionPage.routePath);
+                                }
+                              } else {
+                                log('Access is null');
+                                SnackbarUtils.showError(
+                                    'Login failed: Access is null');
+                              }
+                            } else {
+                              log('Data or data.data is null');
+                              SnackbarUtils.showError(
+                                  'Login failed: Data is null');
+                            }
+                          } catch (e) {
+                            log('Login error: $e');
+                            if (e.toString().contains('502')) {
+                              SnackbarUtils.showError(
+                                  'Login failed: Server error (502)');
+                            } else {
+                              SnackbarUtils.showError('Login failed: $e');
+                            }
+                          }
+                        }
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: context.color.buttoncolor,

@@ -33,7 +33,7 @@ class HomePage extends ConsumerWidget {
                   child: HomePageCard(
                     constance: constance,
                     ammount: constance.bookingAmontText,
-                    img: "assets/image/img-logo.png",
+                    img: "assets/image/sticker.png",
                     resevedOrRupeesText: constance.reservedText,
                     textTittile: constance.bookingText,
                   ),
@@ -44,7 +44,7 @@ class HomePage extends ConsumerWidget {
                   child: HomePageCard(
                     constance: constance,
                     ammount: constance.invoicesAmontText,
-                    img: "assets/image/img-logo.png",
+                    img: "assets/image/moneybag.png",
                     resevedOrRupeesText: constance.rupeesText,
                     textTittile: constance.invoicesText,
                   ),

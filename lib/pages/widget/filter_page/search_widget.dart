@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:vikncodes_task/core/extention/app_color_palete.dart';
 import 'package:vikncodes_task/core/extention/app_extention.dart';

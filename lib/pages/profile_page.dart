@@ -1,6 +1,9 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:vikncodes_task/core/constance/home_page_const.dart';
+import 'package:vikncodes_task/controller/user_profile_provider.dart';
+
 import 'package:vikncodes_task/core/extention/app_color_palete.dart';
 import 'package:vikncodes_task/core/extention/app_extention.dart';
 
@@ -20,28 +23,28 @@ class ProfilePage extends ConsumerWidget {
                 const ProfileCardWidget(),
                 ProfilePageTextAndButton(
                   icon: Icons.arrow_forward_ios,
-                  icon1: Icons.help_outline_rounded,
+                  img: "assets/image/badge-help.png",
                   text: "Help",
                 ),
                 ProfilePageTextAndButton(
                   icon: Icons.arrow_forward_ios,
-                  icon1: Icons.help_outline_rounded,
-                  text: "Help",
+                  img: "assets/image/search-status.png",
+                  text: "FAQ",
                 ),
                 ProfilePageTextAndButton(
                   icon: Icons.arrow_forward_ios,
-                  icon1: Icons.help_outline_rounded,
-                  text: "Help",
+                  img: "assets/image/Add-Person.png",
+                  text: "Invite Friends",
                 ),
                 ProfilePageTextAndButton(
                   icon: Icons.arrow_forward_ios,
-                  icon1: Icons.help_outline_rounded,
-                  text: "Help",
+                  img: "assets/image/shield-search.png",
+                  text: "Terms of service",
                 ),
                 ProfilePageTextAndButton(
                   icon: Icons.arrow_forward_ios,
-                  icon1: Icons.help_outline_rounded,
-                  text: "Help",
+                  img: "assets/image/security-safe.png",
+                  text: "Privacy Policy",
                 )
                 // Icons.arrow_forward_ios
               ],
@@ -58,11 +61,11 @@ class ProfilePageTextAndButton extends StatelessWidget {
     super.key,
     required this.text,
     required this.icon,
-    required this.icon1,
+    required this.img,
     void Function()? onPressed,
   });
   final IconData icon;
-  final IconData icon1;
+  final String img;
   void Function()? onPressed;
   final String text;
 
@@ -74,7 +77,7 @@ class ProfilePageTextAndButton extends StatelessWidget {
         children: [
           IconButton(
             onPressed: onPressed,
-            icon: Icon(icon1),
+            icon: Image.asset(img),
           ),
           Text(
             text,
@@ -88,103 +91,120 @@ class ProfilePageTextAndButton extends StatelessWidget {
   }
 }
 
-class ProfileCardWidget extends StatelessWidget {
+class ProfileCardWidget extends ConsumerWidget {
   const ProfileCardWidget({
     super.key,
   });
 
   @override
-  Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: context.color.profileCardBackground,
-        borderRadius: BorderRadius.circular(
-          context.spacer.space_200,
-        ),
-      ),
-      child: Padding(
-        padding: EdgeInsets.all(context.spacer.space_200),
-        child: Column(
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  Widget build(BuildContext context, WidgetRef ref) {
+    final userProfileAsyncValue = ref.watch(getUserProfileProvider);
+    // log(userProfileAsyncValue.value!.data!.image.toString());
+
+    return userProfileAsyncValue.when(
+      data: (userProfile) {
+        return Container(
+          decoration: BoxDecoration(
+            color: context.color.profileCardBackground,
+            borderRadius: BorderRadius.circular(
+              context.spacer.space_200,
+            ),
+          ),
+          child: Padding(
+            padding: EdgeInsets.all(context.spacer.space_200),
+            child: Column(
               children: [
-                Container(
-                  decoration: BoxDecoration(
-                      color: AppColorPalettes.black500,
-                      borderRadius:
-                          BorderRadius.circular(context.spacer.space_300)),
-                  child: Center(
-                    child: Padding(
-                      padding: EdgeInsets.all(context.spacer.space_100),
-                      child: const Image(
-                          image:
-                              AssetImage('assets/image/img-proFile (2).png')),
-                    ),
-                  ),
-                ),
-                Column(
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
-                      "David Arnold",
-                      style: context.typography.h1Bold,
+                    Container(
+                      decoration: BoxDecoration(
+                          color: AppColorPalettes.black500,
+                          borderRadius:
+                              BorderRadius.circular(context.spacer.space_300)),
+                      child: Center(
+                        child: Padding(
+                          padding: EdgeInsets.all(context.spacer.space_100),
+                          child: Image(
+                            image: userProfile.customerData!.photo!.isEmpty
+                                ? NetworkImage(
+                                    userProfile.customerData?.photo ?? "")
+                                : AssetImage("assets/image/img-profile.png"),
+                          ),
+                        ),
+                      ),
                     ),
-                    Text(
-                      "david012@cabzing",
-                      style: context.typography.bodySubTextWhite,
-                    )
+                    Column(
+                      children: [
+                        Text(
+                          userProfile.data?.username ?? "",
+                          style: context.typography.h1Bold,
+                        ),
+                        Text(
+                          userProfile.data?.email ?? "",
+                          style: context.typography.bodySubTextWhite,
+                        )
+                      ],
+                    ),
+                    const Icon(Icons.edit_square)
                   ],
                 ),
-                const Icon(Icons.edit_square)
-              ],
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(vertical: context.spacer.space_200),
-              child: const Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  RatingWidget(
-                    img: "assets/image/img-logo.png",
-                    rides: "rides",
-                    subtitile: "1234",
-                    titile: "5.9",
-                  ),
-                  RatingWidget(
-                    img: "assets/image/img-logo.png",
-                    rides: "rides",
-                    subtitile: "1234",
-                    titile: "5.9",
-                  ),
-                ],
-              ),
-            ),
-            Container(
-              width: double.infinity,
-              decoration: BoxDecoration(
-                color: AppColorPalettes.black500,
-                borderRadius: BorderRadius.circular(context.spacer.space_400),
-              ),
-              child: Padding(
-                padding: EdgeInsets.all(context.spacer.space_200),
-                child: Center(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
+                Padding(
+                  padding:
+                      EdgeInsets.symmetric(vertical: context.spacer.space_200),
+                  child: const Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Icon(Icons.logout_outlined),
-                      Text(
-                        "logout",
-                        style: context.typography.bodySubText
-                            .copyWith(color: AppColorPalettes.red500),
-                      )
+                      RatingWidget(
+                        img: "assets/image/stars.png",
+                        rides: "rides",
+                        subtitile: "22.11",
+                        titile: "4.3",
+                      ),
+                      RatingWidget(
+                        img: "assets/image/shield-tick.png",
+                        rides: "",
+                        subtitile: 'Verified',
+                        titile: 'KYC',
+                      ),
                     ],
                   ),
                 ),
-              ),
+                Container(
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    color: AppColorPalettes.black500,
+                    borderRadius:
+                        BorderRadius.circular(context.spacer.space_400),
+                  ),
+                  child: Padding(
+                    padding: EdgeInsets.all(context.spacer.space_200),
+                    child: Center(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.logout_outlined,
+                            color: AppColorPalettes.red500,
+                          ),
+                          Text(
+                            "logout",
+                            style: context.typography.bodySubText
+                                .copyWith(color: AppColorPalettes.red500),
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             ),
-          ],
-        ),
-      ),
+          ),
+        );
+      },
+      loading: () => const Center(child: CircularProgressIndicator()),
+      error: (error, stack) => Center(child: Text('Error: $error')),
     );
   }
 }

@@ -1,6 +1,7 @@
 import 'package:go_router/go_router.dart';
 import 'package:vikncodes_task/main.dart';
 import 'package:vikncodes_task/pages/authentication/login_page.dart';
+import 'package:vikncodes_task/pages/bottomnav/bottom_navigation_page.dart';
 import 'package:vikncodes_task/pages/dashborde/home_page.dart';
 import 'package:vikncodes_task/pages/filter_page.dart';
 import 'package:vikncodes_task/pages/invoices_page.dart';
@@ -20,6 +21,12 @@ final router = GoRouter(
         path: HomePage.routePath,
         builder: (context, state) {
           return const HomePage();
+        },
+      ),
+      GoRoute(
+        path: BottomNaviagtionPage.routePath,
+        builder: (context, state) {
+          return const BottomNaviagtionPage();
         },
       ),
       GoRoute(

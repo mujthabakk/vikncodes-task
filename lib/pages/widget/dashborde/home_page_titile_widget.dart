@@ -1,6 +1,10 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:vikncodes_task/core/constance/home_page_const.dart';
 import 'package:vikncodes_task/core/extention/app_extention.dart';
+import 'package:vikncodes_task/pages/profile_page.dart';
 
 class HomePageTitileWidget extends StatelessWidget {
   const HomePageTitileWidget({
@@ -14,7 +18,7 @@ class HomePageTitileWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Image.asset("assets/image/img-logo.png"),
+        InkWell(child: Image.asset("assets/image/img-logo.png")),
         Text(
           constance.titleText,
           style: context.typography.h1Bold,

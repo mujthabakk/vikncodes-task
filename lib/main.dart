@@ -15,7 +15,9 @@ class MainApp extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    // GetUserProfileService().getUserDetails();
     return MaterialApp.router(
+      scaffoldMessengerKey: scaffoldMessngerKey,
       debugShowCheckedModeBanner: false,
       routerConfig: router,
       theme: ref.watch(darkThemeProvider),

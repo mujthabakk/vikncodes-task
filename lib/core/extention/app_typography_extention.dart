@@ -35,25 +35,22 @@ class AppTypographyExtension extends ThemeExtension<AppTypographyExtension> {
     TextStyle? buttonText,
     TextStyle? h1Bold,
     TextStyle? h2,
-    TextStyle?h1SemiBold ,
+    TextStyle? h1SemiBold,
     TextStyle? redText,
     TextStyle? bodySmall,
     TextStyle? bodySmallSemiBold,
     TextStyle? h1,
-    
   }) {
     return AppTypographyExtension(
-      bodySubText:bodySubText?? this.bodySubText,
-      bodySubTextWhite:bodySubTextWhite?? this.bodySubTextWhite,
-      redText:redText?? this.redText,
-    
+      bodySubText: bodySubText ?? this.bodySubText,
+      bodySubTextWhite: bodySubTextWhite ?? this.bodySubTextWhite,
+      redText: redText ?? this.redText,
       bodySmall: bodySmall ?? this.bodySmall,
       bodySmallSemiBold: bodySmallSemiBold ?? this.bodySmallSemiBold,
       h1: h1 ?? this.h1,
       h1SemiBold: h1SemiBold ?? this.h1SemiBold,
       h1Bold: h1Bold ?? this.h1Bold,
       h2: h2 ?? this.h2,
-   
       buttonText: buttonText ?? this.buttonText,
     );
   }
@@ -66,11 +63,9 @@ class AppTypographyExtension extends ThemeExtension<AppTypographyExtension> {
     }
     return AppTypographyExtension(
       redText: TextStyle.lerp(redText, other.redText, t)!,
-      
       bodySubTextWhite:
           TextStyle.lerp(bodySubTextWhite, other.bodySubTextWhite, t)!,
       bodySubText: TextStyle.lerp(bodySubText, other.bodySubText, t)!,
-   
       bodySmall: TextStyle.lerp(bodySmall, other.bodySmall, t)!,
       bodySmallSemiBold:
           TextStyle.lerp(bodySmallSemiBold, other.bodySmallSemiBold, t)!,
@@ -78,7 +73,6 @@ class AppTypographyExtension extends ThemeExtension<AppTypographyExtension> {
       h1SemiBold: TextStyle.lerp(h1SemiBold, other.h1SemiBold, t)!,
       h1Bold: TextStyle.lerp(h1Bold, other.h1Bold, t)!,
       h2: TextStyle.lerp(h2, other.h2, t)!,
-    
       buttonText: TextStyle.lerp(buttonText, other.buttonText, t)!,
     );
   }
