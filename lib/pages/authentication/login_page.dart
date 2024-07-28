@@ -138,7 +138,19 @@ class LoginPage extends ConsumerWidget {
 
                             if (data.data != null &&
                                 data.data?.username == userName.text) {
-                              context.push(BottomNaviagtionPage.routePath);
+                              if (data.data!.access != null) {
+                                if (context.mounted) {
+                                  context.push(BottomNaviagtionPage.routePath);
+                                }
+                              } else {
+                                log('Access is null');
+                                SnackbarUtils.showError(
+                                    'Login failed: Access is null');
+                              }
+                            } else {
+                              log('Data or data.data is null');
+                              SnackbarUtils.showError(
+                                  'Login failed: Data is null');
                             }
                           } catch (e) {
                             log('Login error: $e');
