@@ -5,7 +5,12 @@ import 'package:vikncodes_task/pages/profile_page.dart';
 
 // Define State Providers
 final selectedProvider = StateProvider<int>((ref) => 0);
-final pageControllerProvider = Provider<PageController>((ref) => PageController());
+
+final pageControllerProvider = Provider.autoDispose<PageController>((ref) {
+  final controller = PageController();
+  ref.onDispose(controller.dispose);
+  return controller;
+});
 
 class BottomNaviagtionPage extends ConsumerWidget {
   static const routePath = '/bottomnav';
