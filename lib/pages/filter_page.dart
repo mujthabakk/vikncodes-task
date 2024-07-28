@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:vikncodes_task/controller/filter_controller.dart';
 import 'package:vikncodes_task/controller/get_sales_controller.dart';
 import 'package:vikncodes_task/core/extention/app_color_palete.dart';
 import 'package:vikncodes_task/core/extention/app_extention.dart';
@@ -38,10 +39,9 @@ class FilterPage extends ConsumerWidget {
       body: ref.watch(salesProvider).when(
             data: (data) {
               // Filter data based on search input
-              filterData = data.data!
-                  .where((element) =>
-                      element.date!.contains(searchController.text))
-                  .toList();
+            final  filterData=  ref.watch(FilterControllerProvider(data: data.data!));
+
+             
 
               return SingleChildScrollView(
                 child: Column(
@@ -87,24 +87,22 @@ class FilterPage extends ConsumerWidget {
                           padding: EdgeInsets.all(context.spacer.space_200),
                           child: CalenderWidget(
                             onChanged: (value) {
-                              filterData = data.data!
-                                  .where((element) => element.date!
-                                      .contains(searchController.text))
-                                  .toList();
-                              ref.invalidate(salesProvider);
-                              ref.invalidate(filter);
+                              ref
+                                  .watch(
+                                      FilterControllerProvider(data: data.data!)
+                                          .notifier)
+                                  .filterData(value);
                             },
                             controller: searchController,
                           ),
                         ),
                         CalenderWidget(
                           onChanged: (value) {
-                            filterData = data.data!
-                                .where((element) => element.date!
-                                    .contains(searchController.text))
-                                .toList();
-                            ref.invalidate(salesProvider);
-                            ref.invalidate(filter);
+                            ref
+                                .watch(
+                                    FilterControllerProvider(data: data.data!)
+                                        .notifier)
+                                .filterData(value);
                           },
                           controller: searchController,
                         ),
@@ -130,7 +128,9 @@ class FilterPage extends ConsumerWidget {
                             text: "Invoiced",
                           ),
                           StatusesWidget(
-                            onTap: () {},
+                            onTap: () {
+                              
+                            },
                             text: "Cancelled",
                           ),
                         ],
