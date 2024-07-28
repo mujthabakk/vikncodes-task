@@ -9,41 +9,29 @@ class FilterController extends _$FilterController {
     return data;
   }
 
-  void filterData(
-    String? text,
-  ) {
-    List<Datum> result = [];
-
+  void filterData(String? text) {
     if (text == null || text.isEmpty) {
-      result = state;
+      state = data;
     } else {
-      result = state
+      state = data
           .where((userDetails) => userDetails.date
               .toString()
               .toLowerCase()
               .contains(text.toLowerCase()))
           .toList();
     }
-    state = result;
   }
 
-
-
-    void filterSatus(
-    String? text,
-  ) {
-    List<Datum> result = [];
-
+  void filterStatus(String? text) {
     if (text == null || text.isEmpty) {
-      result = state;
+      state = data;
     } else {
-      result = state
+      state = data
           .where((userDetails) => userDetails.status
               .toString()
               .toLowerCase()
               .contains(text.toLowerCase()))
           .toList();
     }
-    state = result;
   }
 }

@@ -9,8 +9,6 @@ import 'package:vikncodes_task/core/extention/app_color_palete.dart';
 import 'package:vikncodes_task/core/extention/app_extention.dart';
 import 'package:vikncodes_task/core/utils/snak_bar_utils.dart';
 import 'package:vikncodes_task/pages/bottomnav/bottom_navigation_page.dart';
-import 'package:vikncodes_task/service/get_user_profile_service.dart';
-import 'package:vikncodes_task/service/use_details/get_sale_service.dart';
 
 class LoginPage extends ConsumerWidget {
   static const routePath = '/login';
@@ -140,19 +138,7 @@ class LoginPage extends ConsumerWidget {
 
                             if (data.data != null &&
                                 data.data?.username == userName.text) {
-                              if (data.data!.access != null) {
-                                if (context.mounted) {
-                                  context.push(BottomNaviagtionPage.routePath);
-                                }
-                              } else {
-                                log('Access is null');
-                                SnackbarUtils.showError(
-                                    'Login failed: Access is null');
-                              }
-                            } else {
-                              log('Data or data.data is null');
-                              SnackbarUtils.showError(
-                                  'Login failed: Data is null');
+                              context.push(BottomNaviagtionPage.routePath);
                             }
                           } catch (e) {
                             log('Login error: $e');

@@ -14,8 +14,8 @@ class FilterPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    TextEditingController searchController =
-        TextEditingController(text: "2024-06-10");
+    // Initialize the TextEditingController with the desired date
+    TextEditingController searchController = TextEditingController();
 
     return Scaffold(
       appBar: AppBar(
@@ -84,25 +84,11 @@ class FilterPage extends ConsumerWidget {
                         Padding(
                           padding: EdgeInsets.all(context.spacer.space_200),
                           child: CalenderWidget(
-                            controller: searchController,
-                            onChanged: (value) async {
-                              ref
-                                  .watch(
-                                      filterControllerProvider(data: data.data!)
-                                          .notifier)
-                                  .filterData(value);
-                            },
+                            data: data.data!,
                           ),
                         ),
                         CalenderWidget(
-                          controller: searchController,
-                          onChanged: (value) async {
-                            ref
-                                .watch(
-                                    filterControllerProvider(data: data.data!)
-                                        .notifier)
-                                .filterData(value);
-                          },
+                          data: data.data!,
                         ),
                       ],
                     ),
@@ -164,63 +150,64 @@ class FilterPage extends ConsumerWidget {
                       child: const SearchWidget(),
                     ),
                     Padding(
-                        padding: EdgeInsets.all(context.spacer.space_200),
-                        child: ListView.builder(
-                          physics: const NeverScrollableScrollPhysics(),
-                          shrinkWrap: true,
-                          itemCount: filterData.length,
-                          itemBuilder: (context, index) {
-                            return Column(
-                              children: [
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          "#Invoice No",
-                                          style: context.typography.bodySubText,
-                                        ),
-                                        Text(
-                                          filterData[index].id ?? "",
-                                          style: context
-                                              .typography.bodySubTextWhite,
-                                        ),
-                                      ],
-                                    ),
-                                    Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          filterData[index].status ?? "",
-                                          style: context.typography.bodySubText,
-                                        ),
-                                        Text(
-                                          filterData[index].date ?? "",
-                                          style: context
-                                              .typography.bodySubTextWhite,
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.symmetric(
-                                    vertical: context.spacer.space_200,
+                      padding: EdgeInsets.all(context.spacer.space_200),
+                      child: ListView.builder(
+                        physics: const NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        itemCount: filterData.length,
+                        itemBuilder: (context, index) {
+                          return Column(
+                            children: [
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        "#Invoice No",
+                                        style: context.typography.bodySubText,
+                                      ),
+                                      Text(
+                                        filterData[index].id ?? "",
+                                        style:
+                                            context.typography.bodySubTextWhite,
+                                      ),
+                                    ],
                                   ),
-                                  child: const Divider(
-                                    color: AppColorPalettes.grennmix,
-                                    height: 5,
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        filterData[index].status ?? "",
+                                        style: context.typography.bodySubText,
+                                      ),
+                                      Text(
+                                        filterData[index].date ?? "",
+                                        style:
+                                            context.typography.bodySubTextWhite,
+                                      ),
+                                    ],
                                   ),
+                                ],
+                              ),
+                              Padding(
+                                padding: EdgeInsets.symmetric(
+                                  vertical: context.spacer.space_200,
                                 ),
-                              ],
-                            );
-                          },
-                        )),
+                                child: const Divider(
+                                  color: AppColorPalettes.grennmix,
+                                  height: 5,
+                                ),
+                              ),
+                            ],
+                          );
+                        },
+                      ),
+                    ),
                   ],
                 ),
               );
@@ -231,7 +218,3 @@ class FilterPage extends ConsumerWidget {
     );
   }
 }
-
-final filter = StateProvider<List>(
-  (ref) => [],
-);
