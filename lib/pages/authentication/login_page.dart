@@ -10,7 +10,7 @@ import 'package:vikncodes_task/core/extention/app_extention.dart';
 import 'package:vikncodes_task/core/utils/snak_bar_utils.dart';
 import 'package:vikncodes_task/pages/bottomnav/bottom_navigation_page.dart';
 import 'package:vikncodes_task/service/get_user_profile_service.dart';
-import 'package:vikncodes_task/service/use_details/user_details_service.dart';
+import 'package:vikncodes_task/service/use_details/get_sale_service.dart';
 
 class LoginPage extends ConsumerWidget {
   static const routePath = '/login';
@@ -137,13 +137,6 @@ class LoginPage extends ConsumerWidget {
 
                             ref.watch(tokenProvider.notifier).state =
                                 data.data?.access ?? "no token";
-                                
-                            await GetUserProfileService().getUserDetails(
-                              token: data.data?.access ?? "no token",
-                            );
-                            await UserDetailsService().userdetails(
-                              token: data.data?.access ?? "no token",
-                            );
 
                             if (data.data != null &&
                                 data.data?.username == userName.text) {

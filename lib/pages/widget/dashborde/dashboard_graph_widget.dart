@@ -1,3 +1,4 @@
+import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
@@ -60,26 +61,71 @@ class DashBordGraphWidget extends ConsumerWidget {
               padding: EdgeInsets.only(
                   top: context.spacer.space_300,
                   bottom: context.spacer.space_200),
-              child: Container(
+              child: SizedBox(
                 width: double.infinity,
                 height: 200,
-                child: SfCartesianChart(
-                  primaryXAxis: DateTimeAxis(
-                    // majorGridLines: const MajorGridLines(width: 5),
-                    // minorGridLines: const MinorGridLines(width: 5),
-                    autoScrollingDelta: DateTime.april,
-                    isVisible: false,
-                    majorTickLines: const MajorTickLines(width: 1),
-                    minorTickLines: const MinorTickLines(width: 1),
-                    labelStyle: const TextStyle(color: Colors.white),
-                  ),
-                  series: [
-                    LineSeries<SalesData, DateTime>(
-                      dataSource: getChartData(),
-                      xValueMapper: (SalesData sales, _) => sales.date,
-                      yValueMapper: (SalesData sales, _) => sales.sales,
+                child: AspectRatio(
+                  aspectRatio: 1.7,
+                  child: LineChart(
+                    LineChartData(
+                      gridData: FlGridData(show: false),
+                      borderData: FlBorderData(show: false),
+                      titlesData: FlTitlesData(
+                        bottomTitles: AxisTitles(
+                          sideTitles: SideTitles(
+                            showTitles: true,
+                            getTitlesWidget: (value, meta) {
+                              const style = TextStyle(
+                                color: Colors.white,
+                                fontSize: 10,
+                              );
+                              switch (value.toInt()) {
+                                case 1:
+                                  return Text('01', style: style);
+                                case 2:
+                                  return Text('02', style: style);
+                                case 3:
+                                  return Text('03', style: style);
+                                case 4:
+                                  return Text('04', style: style);
+                                case 5:
+                                  return Text('05', style: style);
+                                case 6:
+                                  return Text('06', style: style);
+                                case 7:
+                                  return Text('07', style: style);
+                                case 8:
+                                  return Text('08', style: style);
+                              }
+                              return Container();
+                            },
+                          ),
+                        ),
+                        leftTitles: AxisTitles(
+                          sideTitles: SideTitles(showTitles: false),
+                        ),
+                      ),
+                      lineBarsData: [
+                        LineChartBarData(
+                          isCurved: true,
+                          color: Colors.blue,
+                          barWidth: 4,
+                          dotData: FlDotData(show: false),
+                          belowBarData: BarAreaData(show: false),
+                          spots: [
+                            FlSpot(1, 1),
+                            FlSpot(2, 4),
+                            FlSpot(3, 2.5),
+                            FlSpot(4, 3.5),
+                            FlSpot(5, 2),
+                            FlSpot(6, 3),
+                            FlSpot(7, 1.5),
+                            FlSpot(8, 2.8),
+                          ],
+                        ),
+                      ],
                     ),
-                  ],
+                  ),
                 ),
               ),
             ),

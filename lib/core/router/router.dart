@@ -4,7 +4,7 @@ import 'package:vikncodes_task/pages/authentication/login_page.dart';
 import 'package:vikncodes_task/pages/bottomnav/bottom_navigation_page.dart';
 import 'package:vikncodes_task/pages/dashborde/home_page.dart';
 import 'package:vikncodes_task/pages/filter_page.dart';
-import 'package:vikncodes_task/pages/invoices_page.dart';
+import 'package:vikncodes_task/pages/sales_list_page.dart';
 import 'package:vikncodes_task/pages/profile_page.dart';
 
 final router = GoRouter(
@@ -36,9 +36,9 @@ final router = GoRouter(
         },
       ),
       GoRoute(
-        path: InvoicesPage.routePath,
+        path: SalesListPage.routePath,
         builder: (context, state) {
-          return const InvoicesPage();
+          return const SalesListPage();
         },
       ),
       GoRoute(

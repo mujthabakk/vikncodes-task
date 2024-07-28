@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:vikncodes_task/core/constance/home_page_const.dart';
 import 'package:vikncodes_task/core/extention/app_extention.dart';
+import 'package:vikncodes_task/pages/sales_list_page.dart';
 import 'package:vikncodes_task/pages/widget/dashborde/dashboard_graph_widget.dart';
 import 'package:vikncodes_task/pages/widget/dashborde/home_page_card.dart';
 import 'package:vikncodes_task/pages/widget/dashborde/home_page_titile_widget.dart';
@@ -24,8 +26,13 @@ class HomePage extends ConsumerWidget {
                   padding: EdgeInsets.only(bottom: context.spacer.space_200),
                   child: HomePageTitileWidget(constance: constance),
                 ),
-                DashBordGraphWidget(
-                  constance: constance,
+                InkWell(
+                  onTap: () {
+                    context.push(SalesListPage.routePath);
+                  },
+                  child: DashBordGraphWidget(
+                    constance: constance,
+                  ),
                 ),
                 Padding(
                   padding:

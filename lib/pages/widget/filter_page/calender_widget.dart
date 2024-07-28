@@ -5,8 +5,11 @@ import 'package:vikncodes_task/core/extention/app_extention.dart';
 class CalenderWidget extends StatelessWidget {
   const CalenderWidget({
     super.key,
+    required this.controller,
+    required this.onChanged,
   });
-
+  final TextEditingController controller;
+  final void Function(String) onChanged;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -20,6 +23,8 @@ class CalenderWidget extends StatelessWidget {
           ),
         ),
         child: TextField(
+          onChanged: onChanged,
+          controller: controller,
           decoration: InputDecoration(
             prefixIcon: IconButton(
               onPressed: () {},
