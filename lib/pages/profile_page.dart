@@ -1,11 +1,12 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:vikncodes_task/controller/auth/token_provider.dart';
 import 'package:vikncodes_task/controller/user_profile_provider.dart';
 
 import 'package:vikncodes_task/core/extention/app_color_palete.dart';
 import 'package:vikncodes_task/core/extention/app_extention.dart';
+import 'package:vikncodes_task/pages/authentication/login_page.dart';
 
 class ProfilePage extends ConsumerWidget {
   static const String routerPath = "/profile";
@@ -170,30 +171,36 @@ class ProfileCardWidget extends ConsumerWidget {
                     ],
                   ),
                 ),
-                Container(
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    color: AppColorPalettes.black500,
-                    borderRadius:
-                        BorderRadius.circular(context.spacer.space_400),
-                  ),
-                  child: Padding(
-                    padding: EdgeInsets.all(context.spacer.space_200),
-                    child: Center(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Icon(
-                            Icons.logout_outlined,
-                            color: AppColorPalettes.red500,
-                          ),
-                          Text(
-                            "logout",
-                            style: context.typography.bodySubText
-                                .copyWith(color: AppColorPalettes.red500),
-                          )
-                        ],
+                InkWell(
+                  onTap: () {
+                    ref.read(tokenProvider.notifier).state = null;
+                    context.push(LoginPage.routePath);
+                  },
+                  child: Container(
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      color: AppColorPalettes.black500,
+                      borderRadius:
+                          BorderRadius.circular(context.spacer.space_400),
+                    ),
+                    child: Padding(
+                      padding: EdgeInsets.all(context.spacer.space_200),
+                      child: Center(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            const Icon(
+                              Icons.logout_outlined,
+                              color: AppColorPalettes.red500,
+                            ),
+                            Text(
+                              "logout",
+                              style: context.typography.bodySubText
+                                  .copyWith(color: AppColorPalettes.red500),
+                            )
+                          ],
+                        ),
                       ),
                     ),
                   ),

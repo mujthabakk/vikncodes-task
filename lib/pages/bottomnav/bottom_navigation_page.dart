@@ -3,10 +3,9 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:vikncodes_task/pages/dashborde/home_page.dart';
 import 'package:vikncodes_task/pages/profile_page.dart';
 
-//Define State Providers
-final selectedIndexProvider = StateProvider<int>((ref) => 0);
-final pageControllerProvider =
-    Provider<PageController>((ref) => PageController());
+// Define State Providers
+final selectedProvider = StateProvider<int>((ref) => 0);
+final pageControllerProvider = Provider<PageController>((ref) => PageController());
 
 class BottomNaviagtionPage extends ConsumerWidget {
   static const routePath = '/bottomnav';
@@ -14,11 +13,11 @@ class BottomNaviagtionPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final selectedIndex = ref.watch(selectedIndexProvider.notifier).state;
+    final selectedIndex = ref.watch(selectedProvider);
     final pageController = ref.watch(pageControllerProvider);
 
     void onItemTapped(int index) {
-      ref.watch(selectedIndexProvider.notifier).state = index;
+      ref.read(selectedProvider.notifier).state = index;
       pageController.jumpToPage(index);
     }
 
@@ -29,19 +28,18 @@ class BottomNaviagtionPage extends ConsumerWidget {
           HomePage(),
           Center(child: Text("")),
           Center(child: Text("")),
-          ProfilePage()
+          ProfilePage(),
         ],
         onPageChanged: (index) {
-          ref.watch(selectedIndexProvider.notifier).state = index;
+          ref.read(selectedProvider.notifier).state = index;
         },
+        physics: const NeverScrollableScrollPhysics(), // Disable scrolling
       ),
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Colors.transparent,
         fixedColor: Colors.black,
-        // type: BottomNavigationBarType.fixed,
         currentIndex: selectedIndex,
         onTap: onItemTapped,
-
         items: const [
           BottomNavigationBarItem(
             icon: Image(image: AssetImage('assets/image/home-unselect.png')),
@@ -53,14 +51,12 @@ class BottomNaviagtionPage extends ConsumerWidget {
             label: '',
           ),
           BottomNavigationBarItem(
-            icon:
-                Image(image: AssetImage('assets/image/notification-bing.png')),
+            icon: Image(image: AssetImage('assets/image/notification-bing.png')),
             label: '',
           ),
           BottomNavigationBarItem(
             icon: Image(image: AssetImage('assets/image/profile.png')),
-            activeIcon:
-                Image(image: AssetImage('assets/image/profile-select.png')),
+            activeIcon: Image(image: AssetImage('assets/image/profile-select.png')),
             label: '',
           ),
         ],
