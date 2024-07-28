@@ -7,7 +7,7 @@ import 'package:vikncodes_task/pages/profile_page.dart';
 final selectedProvider = StateProvider<int>((ref) => 0);
 
 final pageControllerProvider = Provider.autoDispose<PageController>((ref) {
-  final controller = PageController();
+  final controller = PageController(initialPage: 0);
   ref.onDispose(controller.dispose);
   return controller;
 });
@@ -56,12 +56,14 @@ class BottomNaviagtionPage extends ConsumerWidget {
             label: '',
           ),
           BottomNavigationBarItem(
-            icon: Image(image: AssetImage('assets/image/notification-bing.png')),
+            icon:
+                Image(image: AssetImage('assets/image/notification-bing.png')),
             label: '',
           ),
           BottomNavigationBarItem(
             icon: Image(image: AssetImage('assets/image/profile.png')),
-            activeIcon: Image(image: AssetImage('assets/image/profile-select.png')),
+            activeIcon:
+                Image(image: AssetImage('assets/image/profile-select.png')),
             label: '',
           ),
         ],
